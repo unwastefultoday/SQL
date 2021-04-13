@@ -8,13 +8,12 @@ CREATE TABLE MOVIES(
  length INT NOT NULL
  );
 
- CREATE TABLE VIEWERS(
+CREATE TABLE VIEWERS(
  id INT PRIMARY KEY auto_increment,
  first_name VARCHAR(60) NOT NULL,
  last_name VARCHAR(60),
  email VARCHAR(60) NOT NULL
  );
-
 
  CREATE TABLE HALLS(
 id INT PRIMARY KEY AUTO_INCREMENT,
@@ -41,22 +40,26 @@ CREATE TABLE seats (
 	FOREIGN KEY (room_id) REFERENCES HALLS(id)
 );
 
+
 CREATE TABLE bookings (
 
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	screening_id INT NOT NULL, 
 	customer_id INT NOT NULL,
 	FOREIGN KEY (screening_id) REFERENCES SCREENINGS(id),
-	FOREIGN KEY (customer_id) REFERENCES VIEWERS(id)
+	FOREIGN KEY (customer_id) REFERENCES VIEWERS2(id)
 );
+
+
 CREATE TABLE reserved_seat (
 
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	booking_id INT NOT NULL,
 	seat_id INT NOT NULL,
-	FOREIGN KEY (booking_id) REFERENCES bookings(id),
+	FOREIGN KEY (booking_id) REFERENCES bookings2(id),
 	FOREIGN KEY (seat_id) REFERENCES seats(id)
 );
+
 
 SELECT*FROM MOVIES;
 SELECT*FROM VIEWERS;
@@ -66,6 +69,7 @@ SELECT*FROM seats;
 SELECT*FROM bookings;
 SELECT*FROM reserved_seat; 
 
+alter table viewers auto_increment =1;
 INSERT INTO seats (row_id, number,room_id)
 VALUES ('A',1,1),('A',2,1),('A',3,1),('A',4,1),('A',5,1),('A',6,1),('A',7,1),('A',8,1),
 ('B',1,1),('B',2,1),('B',3,1),('B',4,1),('B',5,1),('B',6,1),('B',7,1),('B',8,1),
